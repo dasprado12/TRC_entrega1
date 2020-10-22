@@ -8,6 +8,7 @@ Aplicação de conceitos de Nodejs no desenvolvimento de uma aplicação de matr
     [docker-compose](https://docs.docker.com/compose/install/)
 
 ## Como rodar
+    yarn install
     service mongod start
     yarn dev
 
@@ -17,7 +18,7 @@ Aplicação de conceitos de Nodejs no desenvolvimento de uma aplicação de matr
 #### /disciplinas
 Retorna todas as disciplinas cadastradas no banco de dados
 
-#### /disciplinas/< codigo >
+#### /disciplinas/< id >
 Retorna todas as disciplinas cadastradas com o codigo informado
 
 ### POST
@@ -25,11 +26,11 @@ Retorna todas as disciplinas cadastradas com o codigo informado
 Cadastra uma nova disciplina
 
 ### Put
-#### /disciplinas/ < codigo >
+#### /disciplinas/ < id >
 Altera os dados de uma disciplina já cadastrada
 
 ### DELETE
-#### /disciplinas/ < codigo >
+#### /disciplinas/ < id >
 Delete uma disciplina informando seu código
 
 

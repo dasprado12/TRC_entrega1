@@ -12,7 +12,7 @@ class MatriculaController {
 
     async indexPk(req, res){
         const { id } = req.params;
-        const matricula = await Matricula.find({
+        const matricula = await Matricula.findOne({
             'id': id
         })
 
@@ -48,11 +48,15 @@ class MatriculaController {
     async modify(req, res) {
         const { id } = req.params;
         const body_request = req.body; 
-        // evita alterar o código da disciplina
+
+        
         delete body_request.id
-        delete body_request.codigo
         delete body_request.createdAt
         delete body_request.updatedAt
+
+        if(!body_request.codigo){
+            return res.status(400).json({message: "Código não informado"})
+        }
 
         try {
             const disciplina = await Matricula.find({
@@ -60,6 +64,18 @@ class MatriculaController {
             })
             if(!disciplina.length){
                 return res.status(400).json({message: "Disciplina não existe"})
+            }
+        } catch (error) {
+            return res.status(500).json({ message: `Erro no servidor! ${error}` })
+        }
+
+        try {
+            const codigo = await Matricula.find({
+                "codigo": body_request.codigo
+            })
+            console.log(codigo)
+            if(codigo.length == 0){
+                return res.status(400).json({message: "Código da disciplina não existe"})
             }
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })

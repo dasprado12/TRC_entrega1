@@ -13,7 +13,7 @@ class MatriculaController {
     async indexPk(req, res){
         const { id } = req.params;
         const matricula = await Matricula.find({
-            'codigo': id
+            'id': id
         })
 
         return res.status(200).json(matricula)
@@ -56,7 +56,7 @@ class MatriculaController {
 
         try {
             const disciplina = await Matricula.find({
-                "codigo": id
+                "id": id
             })
             if(!disciplina.length){
                 return res.status(400).json({message: "Disciplina não existe"})
@@ -67,7 +67,7 @@ class MatriculaController {
 
         try {
             const alter = await Matricula.updateOne( 
-                { "codigo": id },
+                { "id": id },
                 body_request
             )
             return res.status(200).json(alter)
@@ -80,7 +80,7 @@ class MatriculaController {
         const { id } = req.params;
         try {
             const matricula = await Matricula.deleteMany({
-                'codigo': id 
+                'id': id 
             })
             if(matricula.n > 0){
                 return res.status(200).json({message: "Deletado com Sucesso"})
